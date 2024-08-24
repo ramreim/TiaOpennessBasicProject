@@ -3,6 +3,9 @@
 *.suo
 bin
 obj
+.vs
+.vs/*
+obj/*
 
 # Compiled Object files
 *.slo
