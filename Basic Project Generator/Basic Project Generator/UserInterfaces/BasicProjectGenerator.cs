@@ -818,6 +818,16 @@ namespace Basic_Project_Generator.UserInterfaces
 
         private void btnGenerateAndBuild_Click(object sender, EventArgs e)
         {
+            var methodBase = MethodBase.GetCurrentMethod();
+            _traceWriter.Write(methodBase.Name);
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            var deviceItem = (DeviceItem)cob_DeviceList.SelectedItem;
+
+            _projectGeneratorService.GenerateBlockFromSource(deviceItem);
+
+            Cursor.Current = Cursors.Default;
 
         }
     }

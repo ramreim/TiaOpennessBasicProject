@@ -472,6 +472,16 @@ namespace Basic_Project_Generator.Services
             _apiWrapper.DoCompileDevice(deviceItem);
         }
 
+
+        public void GenerateBlockFromSource(DeviceItem deviceItem, [CallerMemberName] string caller = "")
+        {
+            var methodBase = MethodBase.GetCurrentMethod();
+            if (methodBase.ReflectedType != null) _traceWriter.Write(methodBase.ReflectedType.Name + "." + methodBase.Name + " called from " + caller);
+
+            _apiWrapper.DoGenerateBlockFromSource(deviceItem);
+        }
+
+
         #endregion // Compile
 
         #endregion // methods

@@ -4,6 +4,7 @@ using Siemens.Engineering.Hmi;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 using Siemens.Engineering.SW;
+using Siemens.Engineering.SW.ExternalSources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -661,6 +662,76 @@ namespace Basic_Project_Generator.Interfaces
                 _traceWriter.Write("No device found to compile!");
             }
         }
+
+
+
+
+        public void DoGenerateBlockFromSource(Models.DeviceItem deviceItem, [CallerMemberName] string caller = "")
+        {
+            var methodBase = MethodBase.GetCurrentMethod();
+            if (methodBase.ReflectedType != null) _traceWriter.Write(methodBase.ReflectedType.Name + "." + methodBase.Name + " called from " + caller);
+
+
+
+            //PlcSoftware pclsoft = null;
+
+            //foreach (PlcExternalSource plcExternalSource in pclsoft.ExternalSourceGroup.ExternalSources)
+            //{
+            //   plcExternalSource.GenerateBlocksFromSource();
+            //}
+
+
+            var deviceNotFound = true;
+            foreach (var device in CurrentProject.Devices)
+            {
+                if (device.Name == deviceItem.DeviceName)
+                {
+                    var deviceItemComposition = device.DeviceItems;
+                    foreach (var item in deviceItemComposition)
+                    {
+                        if (item.Name == deviceItem.Name)
+                        {
+                            var softwareContainer = item.GetService<SoftwareContainer>();
+                            if (softwareContainer != null)
+                            {
+                                if (softwareContainer.Software is PlcSoftware)
+                                {
+                                    var plcSoft = ((PlcSoftware)(softwareContainer.Software));
+
+                                    foreach (PlcExternalSource externalSourcePlc in plcSoft.ExternalSourceGroup.ExternalSources)
+                                    {
+                                        externalSourcePlc.GenerateBlocksFromSource();
+                                    }
+                                }
+                            }
+                            var compileProvider = item.GetService<ICompilable>();
+                            if (compileProvider != null)
+                            {
+                                deviceNotFound = false;
+                                var compileResult = compileProvider.Compile();
+                                var compilerMessage = "Compiling Hardware of " + deviceItem.DeviceName + " - " + deviceItem.Name;
+                                _traceWriter.Write(compilerMessage);
+                                if (compileResult.Messages.Count > 0)
+                                {
+                                    if (compileResult.Messages != null && compileResult.Messages.Count > 0)
+                                    {
+                                        GetCompilerMessages("", compileResult.Messages);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (deviceNotFound)
+            {
+                _traceWriter.Write("No device found to compile!");
+            }
+        }
+
+
+
 
         /// <summary>
         /// Retrieve recursive the compile messages
