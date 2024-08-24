@@ -815,5 +815,10 @@ namespace Basic_Project_Generator.UserInterfaces
         #endregion // Compile
 
         #endregion // methods
+
+        private void btnGenerateAndBuild_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

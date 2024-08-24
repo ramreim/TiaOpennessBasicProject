@@ -76,6 +76,7 @@ namespace Basic_Project_Generator.UserInterfaces
             this.lab_DeviceList = new System.Windows.Forms.Label();
             this.lib_TraceWriterOutput = new System.Windows.Forms.ListBox();
             this.GeneratorToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnGenerateAndBuild = new System.Windows.Forms.Button();
             this.grb_TiaPortal.SuspendLayout();
             this.grb_TiaPortalProject.SuspendLayout();
             this.grb_AddNewDevice.SuspendLayout();
@@ -200,6 +201,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // grb_TiaPortalProject
             // 
+            this.grb_TiaPortalProject.Controls.Add(this.btnGenerateAndBuild);
             this.grb_TiaPortalProject.Controls.Add(this.btn_CreateNewProject);
             this.grb_TiaPortalProject.Controls.Add(this.txb_TargetDirectory);
             this.grb_TiaPortalProject.Controls.Add(this.lbl_TargetDirectory);
@@ -544,6 +546,16 @@ namespace Basic_Project_Generator.UserInterfaces
             this.lib_TraceWriterOutput.Size = new System.Drawing.Size(862, 121);
             this.lib_TraceWriterOutput.TabIndex = 4;
             // 
+            // btnGenerateAndBuild
+            // 
+            this.btnGenerateAndBuild.Location = new System.Drawing.Point(18, 206);
+            this.btnGenerateAndBuild.Name = "btnGenerateAndBuild";
+            this.btnGenerateAndBuild.Size = new System.Drawing.Size(173, 23);
+            this.btnGenerateAndBuild.TabIndex = 11;
+            this.btnGenerateAndBuild.Text = "Generate Block and Build";
+            this.btnGenerateAndBuild.UseVisualStyleBackColor = true;
+            this.btnGenerateAndBuild.Click += new System.EventHandler(this.btnGenerateAndBuild_Click);
+            // 
             // BasicProjectGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,6 +632,7 @@ namespace Basic_Project_Generator.UserInterfaces
         private System.Windows.Forms.ComboBox cob_DeviceList;
         private System.Windows.Forms.Button btn_CompileDevice;
         private System.Windows.Forms.Label lab_DeviceToCompile;
+        private System.Windows.Forms.Button btnGenerateAndBuild;
     }
 }
 
