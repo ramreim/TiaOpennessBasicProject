@@ -42,6 +42,7 @@ namespace Basic_Project_Generator.UserInterfaces
             this.rdb_WithoutUI = new System.Windows.Forms.RadioButton();
             this.rdb_WithUI = new System.Windows.Forms.RadioButton();
             this.grb_TiaPortalProject = new System.Windows.Forms.GroupBox();
+            this.btnGenerateAndBuild = new System.Windows.Forms.Button();
             this.btn_CreateNewProject = new System.Windows.Forms.Button();
             this.txb_TargetDirectory = new System.Windows.Forms.TextBox();
             this.lbl_TargetDirectory = new System.Windows.Forms.Label();
@@ -76,7 +77,7 @@ namespace Basic_Project_Generator.UserInterfaces
             this.lab_DeviceList = new System.Windows.Forms.Label();
             this.lib_TraceWriterOutput = new System.Windows.Forms.ListBox();
             this.GeneratorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnGenerateAndBuild = new System.Windows.Forms.Button();
+            this.btnDeleteBlock = new System.Windows.Forms.Button();
             this.grb_TiaPortal.SuspendLayout();
             this.grb_TiaPortalProject.SuspendLayout();
             this.grb_AddNewDevice.SuspendLayout();
@@ -201,6 +202,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // grb_TiaPortalProject
             // 
+            this.grb_TiaPortalProject.Controls.Add(this.btnDeleteBlock);
             this.grb_TiaPortalProject.Controls.Add(this.btnGenerateAndBuild);
             this.grb_TiaPortalProject.Controls.Add(this.btn_CreateNewProject);
             this.grb_TiaPortalProject.Controls.Add(this.txb_TargetDirectory);
@@ -219,6 +221,16 @@ namespace Basic_Project_Generator.UserInterfaces
             this.grb_TiaPortalProject.TabIndex = 1;
             this.grb_TiaPortalProject.TabStop = false;
             this.grb_TiaPortalProject.Text = "TIA Portal project";
+            // 
+            // btnGenerateAndBuild
+            // 
+            this.btnGenerateAndBuild.Location = new System.Drawing.Point(18, 192);
+            this.btnGenerateAndBuild.Name = "btnGenerateAndBuild";
+            this.btnGenerateAndBuild.Size = new System.Drawing.Size(173, 23);
+            this.btnGenerateAndBuild.TabIndex = 11;
+            this.btnGenerateAndBuild.Text = "Generate Block and Build";
+            this.btnGenerateAndBuild.UseVisualStyleBackColor = true;
+            this.btnGenerateAndBuild.Click += new System.EventHandler(this.btnGenerateAndBuild_Click);
             // 
             // btn_CreateNewProject
             // 
@@ -269,7 +281,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // lbl_ProjectName
             // 
             this.lbl_ProjectName.AutoSize = true;
-            this.lbl_ProjectName.Location = new System.Drawing.Point(18, 235);
+            this.lbl_ProjectName.Location = new System.Drawing.Point(18, 247);
             this.lbl_ProjectName.Name = "lbl_ProjectName";
             this.lbl_ProjectName.Size = new System.Drawing.Size(85, 13);
             this.lbl_ProjectName.TabIndex = 6;
@@ -277,7 +289,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // txb_AvailableProjectName
             // 
-            this.txb_AvailableProjectName.Location = new System.Drawing.Point(18, 250);
+            this.txb_AvailableProjectName.Location = new System.Drawing.Point(18, 263);
             this.txb_AvailableProjectName.Name = "txb_AvailableProjectName";
             this.txb_AvailableProjectName.ReadOnly = true;
             this.txb_AvailableProjectName.Size = new System.Drawing.Size(173, 20);
@@ -546,15 +558,15 @@ namespace Basic_Project_Generator.UserInterfaces
             this.lib_TraceWriterOutput.Size = new System.Drawing.Size(862, 121);
             this.lib_TraceWriterOutput.TabIndex = 4;
             // 
-            // btnGenerateAndBuild
+            // btnDeleteBlock
             // 
-            this.btnGenerateAndBuild.Location = new System.Drawing.Point(18, 206);
-            this.btnGenerateAndBuild.Name = "btnGenerateAndBuild";
-            this.btnGenerateAndBuild.Size = new System.Drawing.Size(173, 23);
-            this.btnGenerateAndBuild.TabIndex = 11;
-            this.btnGenerateAndBuild.Text = "Generate Block and Build";
-            this.btnGenerateAndBuild.UseVisualStyleBackColor = true;
-            this.btnGenerateAndBuild.Click += new System.EventHandler(this.btnGenerateAndBuild_Click);
+            this.btnDeleteBlock.Location = new System.Drawing.Point(18, 221);
+            this.btnDeleteBlock.Name = "btnDeleteBlock";
+            this.btnDeleteBlock.Size = new System.Drawing.Size(173, 23);
+            this.btnDeleteBlock.TabIndex = 12;
+            this.btnDeleteBlock.Text = "delete block";
+            this.btnDeleteBlock.UseVisualStyleBackColor = true;
+            this.btnDeleteBlock.Click += new System.EventHandler(this.btnDeleteBlock_Click);
             // 
             // BasicProjectGenerator
             // 
@@ -633,6 +645,7 @@ namespace Basic_Project_Generator.UserInterfaces
         private System.Windows.Forms.Button btn_CompileDevice;
         private System.Windows.Forms.Label lab_DeviceToCompile;
         private System.Windows.Forms.Button btnGenerateAndBuild;
+        private System.Windows.Forms.Button btnDeleteBlock;
     }
 }
 

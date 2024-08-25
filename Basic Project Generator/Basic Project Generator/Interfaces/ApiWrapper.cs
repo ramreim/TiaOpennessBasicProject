@@ -4,6 +4,7 @@ using Siemens.Engineering.Hmi;
 using Siemens.Engineering.HW;
 using Siemens.Engineering.HW.Features;
 using Siemens.Engineering.SW;
+using Siemens.Engineering.SW.Blocks;
 using Siemens.Engineering.SW.ExternalSources;
 using System;
 using System.Collections.Generic;
@@ -742,6 +743,67 @@ namespace Basic_Project_Generator.Interfaces
                 _traceWriter.Write("No device found to compile!");
             }
         }
+
+
+
+        //Runs through block group and deletes blocks
+        private static void DeleteBlocks(PlcSoftware plcsoftware)
+        {
+            PlcBlockSystemGroup group = plcsoftware.BlockGroup;
+            // or BlockUserGroup group = ...;
+            for (int i = group.Blocks.Count - 1; i >= 0; i--)
+            {
+                PlcBlock block = group.Blocks[i];
+                if (block != null)
+                {
+                    if (block.Name == "SumFB")
+                    {
+                        block.Delete();
+                    }
+
+                    //Debug.Print(block.Name);
+
+                    //block.Delete();
+                }
+            }
+        }
+
+
+        public void DoDeleteBlockFromSource(Models.DeviceItem deviceItem, [CallerMemberName] string caller = "")
+        {
+            var methodBase = MethodBase.GetCurrentMethod();
+            if (methodBase.ReflectedType != null) _traceWriter.Write(methodBase.ReflectedType.Name + "." + methodBase.Name + " called from " + caller);
+
+            var deviceNotFound = true;
+            foreach (var device in CurrentProject.Devices)
+            {
+                if (device.Name == deviceItem.DeviceName)
+                {
+                    var deviceItemComposition = device.DeviceItems;
+                    foreach (var item in deviceItemComposition)
+                    {
+                        if (item.Name == deviceItem.Name)
+                        {
+                            var softwareContainer = item.GetService<SoftwareContainer>();
+                            if (softwareContainer != null)
+                            {
+                                if (softwareContainer.Software is PlcSoftware)
+                                {
+                                    DeleteBlocks((PlcSoftware)softwareContainer.Software);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (deviceNotFound)
+            {
+                _traceWriter.Write("No device found to compile!");
+            }
+        }
+
+
 
         /// <summary>
         /// Retrieve recursive the compile messages
