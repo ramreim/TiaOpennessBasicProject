@@ -663,15 +663,18 @@ namespace Basic_Project_Generator.Interfaces
             }
         }
 
+        private static PlcExternalSource CreateBlockFromFile(PlcSoftware plcSoftware)
+        // Creates a block from a AWL, SCL, DB or UDT file
+        {
+            PlcExternalSource externalSource = plcSoftware.ExternalSourceGroup.ExternalSources.CreateFromFile("SumFB.scl", "C:\\Users\\ramunasr\\Desktop\\trinti\\srcSclUdt\\SumFB.scl");
 
-
+            return externalSource;
+        }
 
         public void DoGenerateBlockFromSource(Models.DeviceItem deviceItem, [CallerMemberName] string caller = "")
         {
             var methodBase = MethodBase.GetCurrentMethod();
             if (methodBase.ReflectedType != null) _traceWriter.Write(methodBase.ReflectedType.Name + "." + methodBase.Name + " called from " + caller);
-
-
 
             //PlcSoftware pclsoft = null;
 
@@ -698,10 +701,20 @@ namespace Basic_Project_Generator.Interfaces
                                 {
                                     var plcSoft = ((PlcSoftware)(softwareContainer.Software));
 
+                                    var sd = CreateBlockFromFile(plcSoft);
+
+                                    sd.GenerateBlocksFromSource();
+
+                                    /*
                                     foreach (PlcExternalSource externalSourcePlc in plcSoft.ExternalSourceGroup.ExternalSources)
                                     {
                                         externalSourcePlc.GenerateBlocksFromSource();
+
+                                        Debug.Print(externalSourcePlc.Name + "  " + externalSourcePlc.Parent + "\n\n\n");
+
+                                        Debug.Print(externalSourcePlc.Name + "  " + "SumFB.scl" + "\n\n\n");
                                     }
+                                    */
                                 }
                             }
                             var compileProvider = item.GetService<ICompilable>();
@@ -729,9 +742,6 @@ namespace Basic_Project_Generator.Interfaces
                 _traceWriter.Write("No device found to compile!");
             }
         }
-
-
-
 
         /// <summary>
         /// Retrieve recursive the compile messages
