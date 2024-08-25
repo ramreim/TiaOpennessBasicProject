@@ -701,9 +701,9 @@ namespace Basic_Project_Generator.Interfaces
                                 {
                                     var plcSoft = ((PlcSoftware)(softwareContainer.Software));
 
-                                    var sd = CreateBlockFromFile(plcSoft);
+                                    var externalSource = CreateBlockFromFile(plcSoft);
 
-                                    sd.GenerateBlocksFromSource();
+                                    externalSource.GenerateBlocksFromSource();
 
                                     /*
                                     foreach (PlcExternalSource externalSourcePlc in plcSoft.ExternalSourceGroup.ExternalSources)
