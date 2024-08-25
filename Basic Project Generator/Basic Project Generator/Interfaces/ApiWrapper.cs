@@ -672,6 +672,48 @@ namespace Basic_Project_Generator.Interfaces
             return externalSource;
         }
 
+
+        public void DoDeleteExternalAddedFile(Models.DeviceItem deviceItem, [CallerMemberName] string caller = "")
+        {
+            var methodBase = MethodBase.GetCurrentMethod();
+            if (methodBase.ReflectedType != null) _traceWriter.Write(methodBase.ReflectedType.Name + "." + methodBase.Name + " called from " + caller);
+
+            var deviceNotFound = true;
+            foreach (var device in CurrentProject.Devices)
+            {
+                if (device.Name == deviceItem.DeviceName)
+                {
+                    var deviceItemComposition = device.DeviceItems;
+                    foreach (var item in deviceItemComposition)
+                    {
+                        if (item.Name == deviceItem.Name)
+                        {
+                            var softwareContainer = item.GetService<SoftwareContainer>();
+                            if (softwareContainer != null)
+                            {
+                                if (softwareContainer.Software is PlcSoftware)
+                                {
+                                    DeleteExternalAddedFile((PlcSoftware)softwareContainer.Software);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (deviceNotFound)
+            {
+                _traceWriter.Write("No device found to compile!");
+            }
+        }
+
+        private static void DeleteExternalAddedFile(PlcSoftware plcSoftware)
+        {
+            PlcExternalSource externalSource =
+           plcSoftware.ExternalSourceGroup.ExternalSources.Find("SumFB.scl");
+            externalSource.Delete();
+        }
+
         public void DoGenerateBlockFromSource(Models.DeviceItem deviceItem, [CallerMemberName] string caller = "")
         {
             var methodBase = MethodBase.GetCurrentMethod();

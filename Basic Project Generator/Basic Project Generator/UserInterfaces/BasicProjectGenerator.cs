@@ -843,7 +843,20 @@ namespace Basic_Project_Generator.UserInterfaces
             _projectGeneratorService.DeleteBlockFromSource(deviceItem);
 
             Cursor.Current = Cursors.Default;
+        }
 
+        private void btnDeleteFile_Click(object sender, EventArgs e)
+        {
+            var methodBase = MethodBase.GetCurrentMethod();
+            _traceWriter.Write(methodBase.Name);
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            var deviceItem = (DeviceItem)cob_DeviceList.SelectedItem;
+
+            _projectGeneratorService.DeleteExternalAddedFile(deviceItem);
+
+            Cursor.Current = Cursors.Default;
 
         }
     }

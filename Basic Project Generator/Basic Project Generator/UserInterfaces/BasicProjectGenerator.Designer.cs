@@ -42,6 +42,7 @@ namespace Basic_Project_Generator.UserInterfaces
             this.rdb_WithoutUI = new System.Windows.Forms.RadioButton();
             this.rdb_WithUI = new System.Windows.Forms.RadioButton();
             this.grb_TiaPortalProject = new System.Windows.Forms.GroupBox();
+            this.btnDeleteBlock = new System.Windows.Forms.Button();
             this.btnGenerateAndBuild = new System.Windows.Forms.Button();
             this.btn_CreateNewProject = new System.Windows.Forms.Button();
             this.txb_TargetDirectory = new System.Windows.Forms.TextBox();
@@ -77,7 +78,7 @@ namespace Basic_Project_Generator.UserInterfaces
             this.lab_DeviceList = new System.Windows.Forms.Label();
             this.lib_TraceWriterOutput = new System.Windows.Forms.ListBox();
             this.GeneratorToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnDeleteBlock = new System.Windows.Forms.Button();
+            this.btnDeleteFile = new System.Windows.Forms.Button();
             this.grb_TiaPortal.SuspendLayout();
             this.grb_TiaPortalProject.SuspendLayout();
             this.grb_AddNewDevice.SuspendLayout();
@@ -202,6 +203,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // grb_TiaPortalProject
             // 
+            this.grb_TiaPortalProject.Controls.Add(this.btnDeleteFile);
             this.grb_TiaPortalProject.Controls.Add(this.btnDeleteBlock);
             this.grb_TiaPortalProject.Controls.Add(this.btnGenerateAndBuild);
             this.grb_TiaPortalProject.Controls.Add(this.btn_CreateNewProject);
@@ -222,9 +224,19 @@ namespace Basic_Project_Generator.UserInterfaces
             this.grb_TiaPortalProject.TabStop = false;
             this.grb_TiaPortalProject.Text = "TIA Portal project";
             // 
+            // btnDeleteBlock
+            // 
+            this.btnDeleteBlock.Location = new System.Drawing.Point(18, 208);
+            this.btnDeleteBlock.Name = "btnDeleteBlock";
+            this.btnDeleteBlock.Size = new System.Drawing.Size(173, 23);
+            this.btnDeleteBlock.TabIndex = 12;
+            this.btnDeleteBlock.Text = "delete block";
+            this.btnDeleteBlock.UseVisualStyleBackColor = true;
+            this.btnDeleteBlock.Click += new System.EventHandler(this.btnDeleteBlock_Click);
+            // 
             // btnGenerateAndBuild
             // 
-            this.btnGenerateAndBuild.Location = new System.Drawing.Point(18, 192);
+            this.btnGenerateAndBuild.Location = new System.Drawing.Point(18, 179);
             this.btnGenerateAndBuild.Name = "btnGenerateAndBuild";
             this.btnGenerateAndBuild.Size = new System.Drawing.Size(173, 23);
             this.btnGenerateAndBuild.TabIndex = 11;
@@ -234,7 +246,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // btn_CreateNewProject
             // 
-            this.btn_CreateNewProject.Location = new System.Drawing.Point(18, 32);
+            this.btn_CreateNewProject.Location = new System.Drawing.Point(18, 19);
             this.btn_CreateNewProject.Name = "btn_CreateNewProject";
             this.btn_CreateNewProject.Size = new System.Drawing.Size(173, 33);
             this.btn_CreateNewProject.TabIndex = 0;
@@ -244,7 +256,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // txb_TargetDirectory
             // 
-            this.txb_TargetDirectory.Location = new System.Drawing.Point(18, 170);
+            this.txb_TargetDirectory.Location = new System.Drawing.Point(18, 157);
             this.txb_TargetDirectory.Name = "txb_TargetDirectory";
             this.txb_TargetDirectory.ReadOnly = true;
             this.txb_TargetDirectory.Size = new System.Drawing.Size(173, 20);
@@ -254,7 +266,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // lbl_TargetDirectory
             // 
             this.lbl_TargetDirectory.AutoSize = true;
-            this.lbl_TargetDirectory.Location = new System.Drawing.Point(18, 155);
+            this.lbl_TargetDirectory.Location = new System.Drawing.Point(18, 142);
             this.lbl_TargetDirectory.Name = "lbl_TargetDirectory";
             this.lbl_TargetDirectory.Size = new System.Drawing.Size(81, 13);
             this.lbl_TargetDirectory.TabIndex = 4;
@@ -262,7 +274,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // txb_CurrentProjectName
             // 
-            this.txb_CurrentProjectName.Location = new System.Drawing.Point(18, 130);
+            this.txb_CurrentProjectName.Location = new System.Drawing.Point(18, 117);
             this.txb_CurrentProjectName.Name = "txb_CurrentProjectName";
             this.txb_CurrentProjectName.ReadOnly = true;
             this.txb_CurrentProjectName.Size = new System.Drawing.Size(173, 20);
@@ -272,7 +284,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // lbl_CurrentProjectName
             // 
             this.lbl_CurrentProjectName.AutoSize = true;
-            this.lbl_CurrentProjectName.Location = new System.Drawing.Point(18, 115);
+            this.lbl_CurrentProjectName.Location = new System.Drawing.Point(18, 102);
             this.lbl_CurrentProjectName.Name = "lbl_CurrentProjectName";
             this.lbl_CurrentProjectName.Size = new System.Drawing.Size(69, 13);
             this.lbl_CurrentProjectName.TabIndex = 2;
@@ -281,7 +293,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // lbl_ProjectName
             // 
             this.lbl_ProjectName.AutoSize = true;
-            this.lbl_ProjectName.Location = new System.Drawing.Point(18, 247);
+            this.lbl_ProjectName.Location = new System.Drawing.Point(18, 263);
             this.lbl_ProjectName.Name = "lbl_ProjectName";
             this.lbl_ProjectName.Size = new System.Drawing.Size(85, 13);
             this.lbl_ProjectName.TabIndex = 6;
@@ -289,7 +301,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // txb_AvailableProjectName
             // 
-            this.txb_AvailableProjectName.Location = new System.Drawing.Point(18, 263);
+            this.txb_AvailableProjectName.Location = new System.Drawing.Point(21, 279);
             this.txb_AvailableProjectName.Name = "txb_AvailableProjectName";
             this.txb_AvailableProjectName.ReadOnly = true;
             this.txb_AvailableProjectName.Size = new System.Drawing.Size(173, 20);
@@ -318,7 +330,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // btn_LoadProject
             // 
-            this.btn_LoadProject.Location = new System.Drawing.Point(18, 289);
+            this.btn_LoadProject.Location = new System.Drawing.Point(18, 305);
             this.btn_LoadProject.Name = "btn_LoadProject";
             this.btn_LoadProject.Size = new System.Drawing.Size(173, 33);
             this.btn_LoadProject.TabIndex = 8;
@@ -328,7 +340,7 @@ namespace Basic_Project_Generator.UserInterfaces
             // 
             // btn_OpenProject
             // 
-            this.btn_OpenProject.Location = new System.Drawing.Point(18, 71);
+            this.btn_OpenProject.Location = new System.Drawing.Point(18, 58);
             this.btn_OpenProject.Name = "btn_OpenProject";
             this.btn_OpenProject.Size = new System.Drawing.Size(173, 33);
             this.btn_OpenProject.TabIndex = 1;
@@ -558,15 +570,15 @@ namespace Basic_Project_Generator.UserInterfaces
             this.lib_TraceWriterOutput.Size = new System.Drawing.Size(862, 121);
             this.lib_TraceWriterOutput.TabIndex = 4;
             // 
-            // btnDeleteBlock
+            // btnDeleteFile
             // 
-            this.btnDeleteBlock.Location = new System.Drawing.Point(18, 221);
-            this.btnDeleteBlock.Name = "btnDeleteBlock";
-            this.btnDeleteBlock.Size = new System.Drawing.Size(173, 23);
-            this.btnDeleteBlock.TabIndex = 12;
-            this.btnDeleteBlock.Text = "delete block";
-            this.btnDeleteBlock.UseVisualStyleBackColor = true;
-            this.btnDeleteBlock.Click += new System.EventHandler(this.btnDeleteBlock_Click);
+            this.btnDeleteFile.Location = new System.Drawing.Point(21, 238);
+            this.btnDeleteFile.Name = "btnDeleteFile";
+            this.btnDeleteFile.Size = new System.Drawing.Size(170, 23);
+            this.btnDeleteFile.TabIndex = 13;
+            this.btnDeleteFile.Text = "Delete File";
+            this.btnDeleteFile.UseVisualStyleBackColor = true;
+            this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
             // 
             // BasicProjectGenerator
             // 
@@ -646,6 +658,7 @@ namespace Basic_Project_Generator.UserInterfaces
         private System.Windows.Forms.Label lab_DeviceToCompile;
         private System.Windows.Forms.Button btnGenerateAndBuild;
         private System.Windows.Forms.Button btnDeleteBlock;
+        private System.Windows.Forms.Button btnDeleteFile;
     }
 }
 
